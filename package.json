@@ -11,5 +11,14 @@
     "build:css": "tailwind build src/css/style.css -o static/css/_gen/style.css"
   },
   "author": "Ashish Pathak",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashishpat/ashdown.live.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/ashishpat/ashdown.live/issues"
+  },
+  "homepage": "https://github.com/ashishpat/ashdown.live#readme"
 }

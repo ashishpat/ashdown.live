@@ -5,7 +5,6 @@
         <title>Ashish Pathak</title>
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-1NPRD5Z69Q"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
@@ -14,54 +13,94 @@
 
         gtag('config', 'G-1NPRD5Z69Q');
         </script>
+        <style>
+            .hero {
+                filter: grayscale(100%);
+                transition: filter 0.5s ease;
+            }
+            .hero:hover {
+                filter: grayscale(0%);
+            }
+        </style>
     </head>
-    <body class="flex flex-col min-h-screen container w-11/12 lg:w-10/12 mx-auto pt-0 sm:pt-16   font-josefin">
+    <body class="flex flex-col min-h-screen pt-0 md:pt-16 mt-0 font-josefin">
         <section class="flex-grow">
-            <div class="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-2/3 lg:1/4 ">
-                <div class="flex items-center sm:w-full h-48">
-                    <div class="mt-0 bg-primary w-8 h-full hidden md:block lg:block">
-                        &nbsp;
-                    </div>
-                    <img class="block mx-8 flex-shrink-1 h-24 sm:h-32 rounded-full" src="static/images/ashish1.jpg" alt="Ashish Image">
-                    <div class="mt-4 mt-0 ml-0 text-center text-left flex-grow-4">
-                        <p class="text-2xl sm:text-3xl leading-tight">Ashish Pathak</p>
-                        <div class="flex">
-                            <a href="https://www.linkedin.com/in/ashishpat/"><img class="block  mr-2  h-8 rounded-full" src="static/images/linkedin.png" alt="Ashish Image"></a>
-                            <a href="https://github.com/ashishpat"><img class="block  mr-2  h-8 rounded-full" src="static/images/github.png" alt="Ashish Image"></a>
-                        </div>
-                    </div>
-                </div>
+            
+        </section>
+        
+        <section class="flex-grow">
+            <div style="width: 100%; " class="md:hidden">
+                <img class="hero" src="static/images/kgarira.png" alt="Ashish Image">
             </div>
-            <div class="my-16 text-xl font-light">
-                  <p>
-                    I am a software engineer at UVA School of Medicine and worked as a Director of Technology for <a href="https://kathmandu.codes" class="text-accent font-medium">Kathmandu Codes</a>. 
-                    I have worked as a technical consultant for several non-profits, startups and large organizations. I have been involved in application and product development, as well as building development teams, enterprise services, dev-ops and architecting cloud solutions.
-                    <br><br>
+            <div class="flex items-center justify-between">
+                <div class="mt-4 mt-0 mx-auto flex-grow-4 sm:text-center md:text-left">
+                    <p class="font-semibold" style="font-size: 5rem;">Ashish Pathak</p>
+                    <p class="font-semibold" style="font-size: 2rem;">Software & Audio Engineer</p>
+                </div>
+                <div style="width: 40%; " class="hidden md:block text-right">
+                    <img class="hero" src="static/images/kgarira.png" style="border-radius: 15px 0px 0px 15px;" alt="Ashish Image">
+                </div>
+                <!--
+                <div class="loading">Loading</div>
+	            <div class="trigger"></div>
+                -->
+            </div>
+            <div class="my-16 mx-auto sm:w-10/12 md:w-7/12 text-xl font-light text-justify">
+                  <p class="mb-5">I’m a Senior Software Engineer at the University of Virginia’s School of Medicine.  Originally from Kathmandu, I’m now based in Virginia, USA. I co-founded Kathmandu Codes and have had the pleasure of working as a technical consultant for several INGOs, and been involved in application and product development, building teams, enterprise services, dev-ops and architecting cloud solutions. 
                   </p>
-                  <p>I have a bachelor’s degree in Computer Science form State University of New York (Plattsburgh) with a minor in Computer Security.</p>
+                  <p class="mb-5">Music is a huge part of my life. As an Audio Engineer, I speicalize in live audio and system design. I have had the honor of serving as a technical director for Cornerstone Church and touring with some amazing Nepali artists and bands like 1974 AD, Bipul Chettri, Sajjan Raj Vaidya & Sabin Rai.</p>
+                  <p>I hold a bachelor’s degree in Computer Science and Security (Adv. Honors) from State University of New York (SUNY Plattsburgh).</p>
             </div>
-            <div class="my-16 text-xl font-light">
-                <h3 class="font-medium">Experiences</h3>
-                <div class="flex mt-5 items-center h-14">
-                    <a href="https://uvahealth.com" class="flex-shrink-0"><img class="block flex-shrink-0 mr-2 h-12 rounded-full" src="static/images/uva.png" alt="Ashish Image"></a>
-                    <p class="leading-tight"><span class="font-medium">UVA School of Medicine: </span>Software Engineer (since 2015)</p>
+
+            <section>
+                <behold-widget feed-id="sgJpwNw32cEigT2mAxKr"></behold-widget>
+                <script>
+                  (() => {
+                    const d=document,s=d.createElement("script");s.type="module";
+                    s.src="https://w.behold.so/widget.js";d.head.append(s);
+                  })();
+                </script>
+            </section>
+
+            <div class="my-16 mx-auto sm:w-10/12 md:w-7/12 text-xl font-light text-justify">
+                <div class="my-16 text-xl font-light">
+                    <h3 class="font-medium">Experiences</h3>
+                    <div class="flex mt-5 items-center h-14">
+                        <a href="https://uvahealth.com" class="flex-shrink-0"><img class="block flex-shrink-0 mr-2 h-12 rounded-full" src="static/images/uva.png" alt="Ashish Image"></a>
+                        <p class="leading-tight"><span class="font-medium">UVA School of Medicine: </span>Software Engineer (since 2015)</p>
+                    </div>
+                    <div class="flex mt-5 items-center h-14">
+                        <a href="https://kathmandu.codes" class="flex-shrink-0"><img class="block flex-shrink-0 mr-2 h-12 rounded-full" src="static/images/kathmanducodes.png" alt="Ashish Image"></a>
+                        <p><span class="font-medium">Kathmandu Codes: </span>Founder & Director of Technology</p>
+                    </div>
                 </div>
-                <div class="flex mt-5 items-center h-14">
-                    <a href="https://kathmandu.codes" class="flex-shrink-0"><img class="block flex-shrink-0 mr-2 h-12 rounded-full" src="static/images/kathmanducodes.png" alt="Ashish Image"></a>
-                    <p><span class="font-medium">Kathmandu Codes: </span>Director of Technology</p>
-                </div>
-            </div>
-            <div class="my-16 text-xl font-light">
+
+                <div class="my-16 text-xl font-light">
                     <h3 class="font-medium">Research</h3>
                     <p>
                         “Search Engine Optimization for Threaded-Conversation and Personalized Search”
                     </p>
                     <p class="ml-8">Developed a vertical search engine for TuDiabetes.org using Apache SOLR, using threaded conversation structure to rank various topics within diabetes community for a search result.  </p>
             </div>
+        </div>
+            
+            
         </section>
         
         <footer class='p-5'>
-            <p class="text-xl font-light">Developed using tailwindcss & colors.lol</p>
+            <div class="flex mx-auto justify-center">
+                <a href="https://www.instagram.com/ashdownio/"><img class="block  mr-2  h-8" src="static/images/instagram.png" alt="Instagram"></a>
+                <a href="https://github.com/ashishpat"><img class="block  mr-2  h-8" src="static/images/github-sign.png" alt="Github"></a>
+                <a href="https://www.linkedin.com/in/ashishpat/"><img class="block  mr-2  h-8" src="static/images/linkedin-logo.png" alt="LinkedIn"></a>
+            </div>
         </footer>  
     </body>
+    <!--
+    <script src="https://unpkg.com/three@0.117.1/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.117.1/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.1/ScrollTrigger.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js"></script>
+    -->
+    <!--<script src="mic.js"></script>-->
 </html>
