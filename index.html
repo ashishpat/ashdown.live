@@ -1,105 +1,183 @@
-<html class="relative h-full">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ashish Pathak</title>
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1NPRD5Z69Q"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashish Pathak | Audio & Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: '#050505',
+                        ash: '#E5E5E5',
+                        accent: '#4F46E5', // Subtle indigo for tech/audio hybrid
+                    }
+                }
+            }
+        }
+    </script>
 
-        gtag('config', 'G-1NPRD5Z69Q');
-        </script>
-        <style>
-            .hero {
-                filter: grayscale(100%);
-                transition: filter 0.5s ease;
-            }
-            .hero:hover {
-                filter: grayscale(0%);
-            }
-        </style>
-    </head>
-    <body class="flex flex-col min-h-screen pt-0 md:pt-16 mt-0 font-josefin">
-        <section class="flex-grow">
-            
-        </section>
+    <style>
+        /* Experiential Film Grain Overlay */
+        .bg-noise {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Infinite Marquee Animation */
+        .marquee-container {
+            display: flex;
+            width: 200%;
+            animation: scroll 20s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom selection color */
+        ::selection {
+            background-color: #4F46E5;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-ash font-sans antialiased overflow-x-hidden selection:bg-accent selection:text-white">
+    
+    <!-- Grain Overlay -->
+    <div class="bg-noise"></div>
+
+    <!-- Minimal Header -->
+    <nav class="fixed top-0 w-full p-6 md:p-10 flex justify-between items-center z-40 mix-blend-difference">
+        <div class="font-display font-bold text-xl tracking-tighter uppercase">AP.</div>
+        <!--<a href="#ashdown" class="text-sm tracking-widest uppercase hover:text-accent transition-colors duration-300">Rentals & Production &#8594;</a>-->
+    </nav>
+
+    <!-- Experiential Hero Section -->
+    <header class="relative h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden">
+        <!-- Abstract gradient orb for background depth -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse"></div>
         
-        <section class="flex-grow">
-            <div style="width: 100%; " class="md:hidden mb-16">
-                <img class="hero" src="static/images/kgarira.png" alt="Ashish Image">
-            </div>
-            <div class="flex items-center justify-between">
-                <div class="mt-4 mt-0 mx-auto flex-grow-4 text-center md:text-left">
-                    <p class="font-semibold text-5xl">Ashish Pathak</p>
-                    <p class="font-semibold text-3xl">Software & Audio Engineer</p>
-                </div>
-                <div style="width: 40%; " class="hidden md:block text-right">
-                    <img class="hero" src="static/images/kgarira.png" style="border-radius: 15px 0px 0px 15px;" alt="Ashish Image">
-                </div>
-                <!--
-                <div class="loading">Loading</div>
-	            <div class="trigger"></div>
-                -->
-            </div>
-            <div class="my-16 mx-auto w-10/12 md:w-7/12 text-xl font-light text-justify">
-                  <p class="mb-5">I’m a Senior Software Engineer at the University of Virginia’s School of Medicine.  Originally from Kathmandu, I’m now based in Virginia, USA. I co-founded Kathmandu Codes and have had the pleasure of working as a technical consultant for several INGOs, and been involved in application and product development, building teams, enterprise services, dev-ops and architecting cloud solutions. 
-                  </p>
-                  <p>I hold a bachelor’s degree in Computer Science and Security (Adv. Honors) from State University of New York (SUNY Plattsburgh).</p>
-            </div>
-            <!--
-            <section>
-                <behold-widget feed-id="sgJpwNw32cEigT2mAxKr"></behold-widget>
-                <script>
-                  (() => {
-                    const d=document,s=d.createElement("script");s.type="module";
-                    s.src="https://w.behold.so/widget.js";d.head.append(s);
-                  })();
-                </script>
-            </section>
-            -->
-            <div class="my-16 mx-auto w-10/12 md:w-7/12 text-xl font-light text-justify">
-                <div class="my-16 text-xl font-light">
-                    <h3 class="font-medium">Experiences</h3>
-                    <div class="flex mt-5 items-center h-14">
-                        <a href="https://uvahealth.com" class="flex-shrink-0"><img class="block flex-shrink-0 mr-2 h-12 rounded-full" src="static/images/uva.png" alt="Ashish Image"></a>
-                        <p class="leading-tight"><span class="font-medium">UVA School of Medicine: </span>Software Engineer (since 2015)</p>
-                    </div>
-                    <div class="flex mt-5 items-center h-14">
-                        <a href="https://kathmandu.codes" class="flex-shrink-0"><img class="block flex-shrink-0 mr-2 h-12 rounded-full" src="static/images/kathmanducodes.png" alt="Ashish Image"></a>
-                        <p><span class="font-medium">Kathmandu Codes: </span>Founder & Director of Technology</p>
-                    </div>
-                </div>
-
-                <div class="my-16 text-xl font-light">
-                    <h3 class="font-medium">Research</h3>
-                    <p>
-                        “Search Engine Optimization for Threaded-Conversation and Personalized Search”
-                    </p>
-                    <p class="ml-8">Developed a vertical search engine for TuDiabetes.org using Apache SOLR, using threaded conversation structure to rank various topics within diabetes community for a search result.  </p>
+        <div class="relative z-10">
+            <h1 class="font-display font-bold text-6xl md:text-9xl lg:text-[12rem] leading-none tracking-tighter uppercase">
+                <span class="block hover:translate-x-4 transition-transform duration-700">Ashish</span>
+                <span class="block hover:translate-x-8 transition-transform duration-700 text-transparent bg-clip-text bg-gradient-to-r from-ash to-neutral-600">Pathak</span>
+            </h1>
+            <div class="mt-8 flex flex-col md:flex-row md:items-center gap-6">
+                <div class="w-12 h-[1px] bg-neutral-600"></div>
+                <p class="text-lg md:text-xl font-light tracking-wide max-w-xl text-neutral-400">
+                    FOH Audio Engineer. Senior Software Engineer. <br>I build <span class="text-ash font-medium">software</span> and mix <span class="text-ash font-medium">front-of-house audio</span>.
+                </p>
             </div>
         </div>
-            
-            
-        </section>
-        
-        <footer class='p-5 mb-5'>
-            <div class="flex mx-auto justify-center">
-                <a href="https://www.instagram.com/ashdownio/"><img class="block  mr-2  h-8" src="static/images/instagram.png" alt="Instagram"></a>
-                <a href="https://github.com/ashishpat"><img class="block  mr-2  h-8" src="static/images/github-sign.png" alt="Github"></a>
-                <a href="https://www.linkedin.com/in/ashishpat/"><img class="block  mr-2  h-8" src="static/images/linkedin-logo.png" alt="LinkedIn"></a>
+    </header>
+
+    <!-- Infinite Scrolling Marquee -->
+    <div class="w-full overflow-hidden py-10 border-y border-neutral-900 bg-obsidian z-20 relative">
+        <div class="marquee-container text-4xl md:text-6xl font-display font-bold tracking-tighter text-neutral-800 uppercase whitespace-nowrap">
+            <span class="mx-8">FOH Engineer</span> &bull; 
+            <span class="mx-8">Software Engineer</span> &bull; 
+            <span class="mx-8">System Tech</span> &bull; 
+            <span class="mx-8">Touring</span> &bull; 
+            <span class="mx-8">FOH Engineer</span> &bull; 
+            <span class="mx-8">Software Engineer</span> &bull; 
+            <span class="mx-8">System Tech</span> &bull; 
+            <span class="mx-8">Touring</span>
+        </div>
+    </div>
+
+    <!-- Asymmetrical Profile/About Section -->
+    <section class="py-32 px-6 md:px-10 max-w-screen-2xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <!-- Left: Profile Image Placeholder -->
+            <div class="lg:col-span-5 relative group cursor-crosshair">
+                <div class="absolute inset-0 bg-accent translate-x-4 translate-y-4 rounded-sm transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 opacity-50"></div>
+                <!-- Replace src with your actual profile/console mixing image -->
+                <img src="static/images/kgarira1.png"Ashish Mixing Console" class="relative z-10 w-full h-[600px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
             </div>
-        </footer>  
-    </body>
-    <!--
-    <script src="https://unpkg.com/three@0.117.1/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.117.1/examples/js/loaders/OBJLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.1/ScrollTrigger.min.js"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js"></script>
+            
+            <!-- Right: Text Content -->
+            <div class="lg:col-span-7 flex flex-col justify-center">
+                <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight mb-8">Systematic precision, on stage and in the codebase.</h2>
+                <div class="space-y-6 text-neutral-400 font-light text-lg leading-relaxed max-w-2xl">
+                    <p>
+                        With over a decade of experience as a software engineer, building everything from complex full-stack applications to iOS & Android apps, my passion for problem-solving extends beyond the screen and few years ago, I brought the same midset directly into the live audio realm.
+                    <p>
+                    <p>
+                        Since then, I've spent my time on the road touring across the US and internationally, mixing FOH (front-of-house) or as an A2/RF engineer for <strong>Purna Rai & Dajubhaiharu</strong>, <strong>Sajjan Raj Vaidya</strong>, <strong>Bipul Chettri</strong>, <strong>1974 AD</strong>, <strong>Sabin Rai & The Pharaoh</strong>, <strong>Raju Lama & The Angels Band</strong>, <strong>Bartika Eam Rai</strong> and more.
+                    </p>
+                    <p>
+                        Whether I am mixing a full-house show, coordinating complex RF systems, tuning a venue's PA, or architecting a scalable backend, the mindset is the same: keep the routing clean, eliminate faillure points under pressure, and design systems that work perfectly every night.
+                    </p>
+                </p>
+                </div>
+
+                <!-- Dual Skills Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-16 pt-10 border-t border-neutral-900">
+                    <div>
+                        <h3 class="font-display text-xl text-ash mb-4">Live Audio Engineering</h3>
+                        <ul class="space-y-2 text-neutral-500 text-sm tracking-wide">
+                            <li>Front of House (FOH) Mixing</li>
+                            <li>A2 & RF Engineer Management</li>
+                            <li>SMAART System Tuning & Alignment</li>
+                            <li>Tour & Production Management</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-xl text-ash mb-4">Software Architecture</h3>
+                        <ul class="space-y-2 text-neutral-500 text-sm tracking-wide">
+                            <li>Full-stack Software Development</li>
+                            <li>Azure & Google Cloud Platform (GCP)</li>
+                            <li>Firebase Integration</li>
+                            <li>Kotlin & multi-platform Applications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transition to Rental Company (Ashdown Live LLC) -->
+    <section id="ashdown" class="min-h-[70vh] flex flex-col justify-center items-center text-center px-6 relative border-t border-neutral-900 bg-black">
+        <p class="text-accent uppercase tracking-[0.3em] text-sm mb-6 font-bold">Equipment & Production</p>
+        <h2 class="font-display text-5xl md:text-8xl font-bold tracking-tighter uppercase mb-10 max-w-5xl">
+            Need Premium Tour Tech?
+        </h2>
+        <p class="text-neutral-400 max-w-xl mx-auto mb-12 text-lg font-light">
+            I own and operate <strong class="text-ash font-medium">Ashdown Live LLC</strong>, providing elite touring flypacks, consoles, and scalable PA systems for touring events & local productions in Charlottesville area.
+        </p>
+        <!-- CTA Button simulating page transition -->
+        <!--
+        
+        <a href="ashdown-rentals.html" class="group relative inline-flex items-center justify-center px-10 py-5 font-bold text-obsidian bg-ash rounded-full overflow-hidden transition-all duration-300 hover:scale-105">
+            <span class="absolute inset-0 w-full h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            <span class="relative flex items-center gap-3 group-hover:text-white transition-colors duration-300">
+                Visit Ashdown Live LLC
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </span>
+        </a>
+
     -->
-    <!--<script src="mic.js"></script>-->
+    </section>
+
+    <!-- Minimal Footer -->
+    <footer class="py-10 text-center text-neutral-600 text-sm tracking-widest border-t border-neutral-900">
+        &copy; 2026 ASHISH PATHAK. BUILT FOR SCALE & SOUND.
+    </footer>
+
+</body>
 </html>
