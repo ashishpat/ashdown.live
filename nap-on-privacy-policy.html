@@ -33,7 +33,7 @@
 <body>
 
 <h1>Nap-On Privacy Policy</h1>
-<p class="meta">Effective date: June 22, 2026</p>
+<p class="meta">Effective date: June 25, 2026</p>
 
 <p>
   Nap-On ("the app") is a smartwatch nap-detection app that measures your heart rate and
@@ -49,8 +49,10 @@
   <li>
     <strong>Heart-rate and motion data.</strong> While a nap session is running, the app reads
     your heart rate (body sensors) and accelerometer (motion) data from your watch. This data is
-    processed <em>on your device</em> in real time to detect sleep onset. It is not continuously
-    transmitted to us or used to identify you.
+    processed <em>on your device</em> in real time to detect sleep onset. By default it stays on
+    your device and is not used to identify you. It is only uploaded if you actively submit a
+    problem report, or if you choose to turn on the optional "Improve Nap-On" program described
+    below.
   </li>
   <li>
     <strong>Diagnostic session logs.</strong> If you choose to report a problem using the
@@ -60,12 +62,23 @@
     upload. Logs are only uploaded when you actively submit a report.
   </li>
   <li>
+    <strong>Optional "Improve Nap-On" data sharing.</strong> Nap-On includes an optional program,
+    turned <strong>off by default</strong>, that you can enable to help us improve the accuracy of
+    sleep detection. If, and only if, you turn it on (in Settings, after giving consent), the app
+    uploads a record of each completed nap session. This record includes a time series of your
+    heart-rate and motion (accelerometer) readings sampled during the session, summary detection
+    statistics, your nap duration, your watch's manufacturer and model, the app version, and your
+    answers to two optional questions shown when a nap ends (whether you fell asleep, and whether
+    the alarm woke you at a good time). You can turn this program off at any time in Settings,
+    which stops all future uploads. It is never enabled without your explicit opt-in.
+  </li>
+  <li>
     <strong>Crash and stability data.</strong> The app uses Google's Crashlytics service to
     automatically report crashes and errors, which helps us fix bugs. These reports include
     technical information such as device state and error details.
   </li>
   <li>
-    <strong>Anonymous identifier.</strong> Before any diagnostic log can be uploaded, the app
+    <strong>Anonymous identifier.</strong> Before any data can be uploaded, the app
     signs in anonymously through Firebase Authentication. This creates a random, anonymous
     identifier used only to authorize the upload. It is not linked to your name, email, or any
     account, and you do not create an account to use Nap-On.
@@ -82,6 +95,10 @@
   <li>To detect sleep onset and wake you at the end of your nap (on-device).</li>
   <li>To diagnose and fix problems you report, and to improve the app's reliability.</li>
   <li>To monitor and resolve crashes and technical errors.</li>
+  <li>
+    To research and improve the accuracy of our sleep-detection algorithm — but only using data
+    you choose to share through the optional "Improve Nap-On" program.
+  </li>
 </ul>
 <p>We do not sell your information, and we do not use it for advertising or marketing.</p>
 
@@ -96,11 +113,11 @@
 
 <h2>Data retention</h2>
 <p>
-  Diagnostic logs and crash reports are retained until we manually delete them. You can ask us
-  to delete any logs associated with a report you submitted by contacting us at the address
-  below; because logs are tied to a randomly generated anonymous identifier rather than your
-  identity, please include details that help us locate the relevant report (such as the
-  approximate date and time you submitted it and your watch model).
+  Diagnostic logs, optional "Improve Nap-On" session records, and crash reports are retained
+  until we manually delete them. You can ask us to delete any data associated with you by
+  contacting us at the address below; because this data is tied to a randomly generated anonymous
+  identifier rather than your identity, please include details that help us locate it (such as the
+  approximate dates you used the app or submitted a report, and your watch model).
 </p>
 
 <h2>Data security</h2>
@@ -124,8 +141,13 @@
     your device settings. Note that nap detection relies on heart-rate access to function.
   </li>
   <li>Heart-rate and motion data are only read while a nap session is active.</li>
-  <li>Diagnostic logs are uploaded only when you choose to submit a report.</li>
-  <li>You can request deletion of submitted logs by contacting us.</li>
+  <li>Diagnostic logs are uploaded only when you choose to submit a problem report.</li>
+  <li>
+    The optional "Improve Nap-On" data-sharing program is off by default. Your heart-rate and
+    motion data leave your device only if you turn it on, and you can turn it back off at any time
+    in Settings.
+  </li>
+  <li>You can request deletion of any data you have shared by contacting us.</li>
 </ul>
 
 <h2>Changes to this policy</h2>
