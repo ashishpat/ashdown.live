@@ -32,6 +32,19 @@
     .skills-grid{grid-template-columns:1fr;}
     .main-nav{display:none;}
   }
+  .story{position:relative;aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 30px 80px rgba(0,0,0,0.55);}
+  .story-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease;filter:saturate(0.9) contrast(1.05);}
+  .story-slide.active{opacity:1;}
+  .story-scrim{position:absolute;top:0;left:0;right:0;height:90px;background:linear-gradient(rgba(0,0,0,0.55),transparent);z-index:2;pointer-events:none;}
+  .story-progress{position:absolute;top:14px;left:14px;right:14px;display:flex;gap:6px;z-index:3;}
+  .story-seg{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.3);overflow:hidden;}
+  .story-seg-fill{display:block;height:100%;width:0%;background:#f2ede4;}
+  .story-seg-fill.filled{width:100%;}
+  .story-seg-fill.animate{width:100%;transition:width linear;}
+  .story-caption{position:absolute;left:14px;bottom:14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:rgba(12,11,9,0.82);padding:7px 12px;border-radius:4px;color:oklch(0.75 0.15 60);z-index:3;}
+  .story-tap{position:absolute;top:0;bottom:0;width:50%;z-index:2;}
+  .story-tap-prev{left:0;}
+  .story-tap-next{right:0;}
 </style>
 </head>
 <body>
@@ -93,9 +106,16 @@
 
   <!-- about -->
   <section id="about" data-reveal class="about-grid" style="position:relative;z-index:4;max-width:1200px;margin:0 auto;padding:110px 48px;box-sizing:border-box;">
-    <div style="position:relative;">
-      <img src="static/images/kgarira1.png" alt="Ashish Pathak at front of house" style="width:100%;display:block;border-radius:6px;filter:saturate(0.9) contrast(1.05);box-shadow:0 30px 80px rgba(0,0,0,0.55);">
-      <div style="position:absolute;left:14px;bottom:14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:rgba(12,11,9,0.82);padding:7px 12px;border-radius:4px;color:oklch(0.75 0.15 60);">// on the road</div>
+    <div class="story" id="about-story">
+      <img class="story-slide" src="static/gallery/kgarira1.png" alt="K Garira? FOH View" data-caption="// kgarira">
+      <img class="story-slide active" src="static/gallery/20260703_221521.jpeg" alt="Front of house view of a Purna Rai &amp; Dajubhaiharu show" data-caption="// front of house">
+      <img class="story-slide" src="static/gallery/20260703_224104.jpeg" alt="SMAART system analyzer at the mix position" data-caption="// system tuning">
+      <img class="story-slide" src="static/gallery/20260704_224455.jpeg" alt="Stage lighting during a live set" data-caption="// showtime">
+      <div class="story-scrim"></div>
+      <div class="story-progress" id="story-progress"></div>
+      <div class="story-caption" id="story-caption">// front of house</div>
+      <div class="story-tap story-tap-prev" aria-label="Previous"></div>
+      <div class="story-tap story-tap-next" aria-label="Next"></div>
     </div>
     <div>
       <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(0.75 0.15 60);margin-bottom:20px;">01 &mdash; About</div>
@@ -210,6 +230,51 @@
     if (r.top < innerHeight * 0.9) { el.classList.add('revealed'); return; }
     io.observe(el);
   });
+
+  var story = document.getElementById('about-story');
+  if (story) {
+    var slides = [].slice.call(story.querySelectorAll('.story-slide'));
+    var progress = document.getElementById('story-progress');
+    var caption = document.getElementById('story-caption');
+    var fills = slides.map(function() {
+      var seg = document.createElement('div');
+      seg.className = 'story-seg';
+      var fill = document.createElement('div');
+      fill.className = 'story-seg-fill';
+      seg.appendChild(fill);
+      progress.appendChild(seg);
+      return fill;
+    });
+    var current = 0;
+    var storyTimer;
+    var DURATION = 4000;
+    function renderStory(i, animate) {
+      slides[current].classList.remove('active');
+      current = (i + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      caption.textContent = slides[current].dataset.caption;
+      fills.forEach(function(f, idx) {
+        f.classList.remove('animate');
+        f.style.transition = 'none';
+        f.style.width = idx < current ? '100%' : '0%';
+      });
+      if (animate) {
+        void fills[current].offsetWidth;
+        fills[current].style.transition = 'width ' + DURATION + 'ms linear';
+        fills[current].style.width = '100%';
+      }
+    }
+    function nextStory() { renderStory(current + 1, true); scheduleStory(); }
+    function prevStory() { renderStory(current - 1, true); scheduleStory(); }
+    function scheduleStory() {
+      clearTimeout(storyTimer);
+      storyTimer = setTimeout(nextStory, DURATION);
+    }
+    story.querySelector('.story-tap-prev').addEventListener('click', prevStory);
+    story.querySelector('.story-tap-next').addEventListener('click', nextStory);
+    renderStory(0, true);
+    scheduleStory();
+  }
 
   var canvas = document.getElementById('mic-canvas');
   var fine = window.matchMedia && matchMedia('(pointer:fine)').matches;
