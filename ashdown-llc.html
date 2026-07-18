@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashdown Live LLC | Premium Live Audio & Concert Rentals</title>
+    <!-- Tailwind CSS for modern, clean layout grids and typography -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0B0F19; color: #F3F4F6; }
+        .heading-font { font-family: 'Cabinet Grotesk', sans-serif; }
+        /* Subtle glassmorphism effect for the premium price cards */
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HERO BANNER SECTION -->
+    <!-- Utilizes the immersive concert perspective of concert-hero.jpg as a full-bleed, professional background -->
+    <header class="relative min-h-screen flex flex-col justify-between bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(to bottom, rgba(11, 15, 25, 0.6), rgba(11, 15, 25, 0.95)), url('static/images/concert-hero.jpg');">
+        
+        <!-- Navigation bar -->
+        <nav class="w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <div class="heading-font text-2xl font-extrabold tracking-wider text-white">ASHDOWN<span class="text-blue-500">LIVE</span></div>
+            <a href="mailto:ashish@ashdownlive.com" class="text-sm font-semibold tracking-wide text-gray-300 hover:text-white border border-gray-700 hover:border-gray-500 px-4 py-2 rounded-md transition duration-300">Contact Desk</a>
+        </nav>
+
+        <!-- Main Hero Text Content -->
+        <div class="w-full max-w-4xl mx-auto px-6 text-center py-20 my-auto">
+            <span class="text-xs font-bold tracking-widest text-blue-400 uppercase bg-blue-950/50 px-3 py-1.5 rounded-full border border-blue-900/50">Tour-Grade Audio Integration</span>
+            <h1 class="heading-font text-5xl md:text-7xl font-extrabold tracking-tight text-white mt-6 mb-6 leading-tight">
+                High-Fidelity Engineering. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Low-Profile Aesthetics.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+                Bespoke sound reinforcement, precision RF coordination, and premium dry-hire equipment deployment tailored for Charlottesville’s luxury events and national touring packages.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#inventory" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-md shadow-lg shadow-blue-900/30 transition duration-300">Explore Rental Inventory</a>
+                <a href="#services" class="bg-gray-900/80 hover:bg-gray-800 text-gray-300 border border-gray-800 hover:border-gray-700 font-semibold px-8 py-4 rounded-md transition duration-300">Full-Service Production</a>
+            </div>
+        </div>
+
+        <!-- Scroll anchor bar -->
+        <div class="w-full text-center py-6 border-t border-gray-900 bg-gray-950/40">
+            <p class="text-xs tracking-widest text-gray-500 uppercase">Based in Charlottesville, Virginia — Serving Nationwide Tours</p>
+        </div>
+    </header>
+
+
+    <!-- 2. CORE CONSOLE & EQUIPMENT RENTAL SECTION -->
+    <!-- Showcases cropped, immaculate product shots for targeted premium inventory rental packages -->
+    <section id="inventory" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="heading-font text-3xl md:text-4xl font-bold text-white mb-4">Tour-Ready Mixing Centers & Control</h2>
+            <p class="text-gray-400">Pristine, state-of-the-art digital control surfaces configured for immediate deployment. All console dry-hires are housed in secure, heavy-duty ATA flight cases.</p>
+        </div>
+
+        <!-- 2-Column Responsive Inventory Grid -->
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+            
+            <!-- Item 1: Behringer WING Console (Referencing the clean, illuminated screen shot) -->
+            <div class="glass-card rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between group transition-all duration-300 hover:border-blue-900/50">
+                <div>
+                    <!-- Displaying the clean view of the active, lit console strip -->
+                    <div class="h-72 w-full overflow-hidden bg-gray-900">
+                        <img src="static/images/wing2.jpg" alt="Behringer WING 48-Channel Control Center" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="heading-font text-2xl font-bold text-white">Behringer WING + DL32 Stage Box</h3>
+                            <span class="text-sm font-semibold text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded border border-blue-900/30">$300 / Day</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                            Flagship 48-stereo-channel digital mixing infrastructure optimized for high-capacity live musical acts, major corporate galas, and multi-track archive recording. Features 40-bit internal floating processing and expansive emulated dynamic plug-in racks.
+                        </p>
+                        <ul class="space-y-2.5 text-xs text-gray-400 border-t border-gray-800/60 pt-4">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span> 48 Stereo Input Channels / 28 Mix Busses</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span> Premium Premium Midas PRO Mic Preamps onboard</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span> 10.1" Multi-Touch capacitive display workflow</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="mailto:ashish@ashdownlive.com?subject=Rental Inquiry: Behringer WING" class="w-full block text-center bg-gray-800 hover:bg-blue-600 text-gray-200 hover:text-white text-sm font-semibold py-3 rounded transition duration-300">Request Dry Hire</a>
+                </div>
+            </div>
+
+            <!-- Item 2: Midas M32R Console (Referencing the clean, direct overhead product perspective) -->
+            <div class="glass-card rounded-xl overflow-hidden shadow-2xl flex flex-col justify-between group transition-all duration-300 hover:border-blue-900/50">
+                <div>
+                    <!-- Displaying the immaculate, cropped technical shot of the M32R surface -->
+                    <div class="h-72 w-full overflow-hidden bg-gray-900">
+                        <img src="static/images/m32r.jpg" alt="Midas M32R Digital Mixing Desk" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="heading-font text-2xl font-bold text-white">Midas M32R LIVE + DL32 Stage Box</h3>
+                            <span class="text-sm font-semibold text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded border border-blue-900/30">$200 / Day</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mb-6 leading-relaxed">
+                            The industry-standard compact touring powerhouse. Combining legendary Midas sound clarity with a streamlined, space-saving format factor. Excellent for visiting engineers, private estate weddings, and mid-sized band requirements.
+                        </p>
+                        <ul class="space-y-2.5 text-xs text-gray-400 border-t border-gray-800/60 pt-4">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span> Up to 40 Simultaneous Input Channels</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span> 16 Award-Winning Midas PRO Preamplifiers</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span> High-precision motorized faders & custom rack casing</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="mailto:ashish@ashdownlive.com?subject=Rental Inquiry: Midas M32R" class="w-full block text-center bg-gray-800 hover:bg-blue-600 text-gray-200 hover:text-white text-sm font-semibold py-3 rounded transition duration-300">Request Dry Hire</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- 3. LOCAL LOGISTICS & DISCREET COURIER POLICIES -->
+    <!-- Clearly documents the curbside logistics framework designed for privacy and asset defense -->
+    <section class="border-t border-gray-900 bg-gray-950/40 py-20">
+        <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+            <div class="p-4">
+                <h4 class="heading-font text-lg font-bold text-white mb-2">🚚 Local Delivery Zone</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    Complimentary secure courier transit provided within Charlottesville limits for orders exceeding $250. We bring the gear straight to your venue loading point.
+                </p>
+            </div>
+            <div class="p-4">
+                <h4 class="heading-font text-lg font-bold text-white mb-2">📦 Curbside Drop-off</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    Rentals are explicitly drop-and-go in their transit configurations. Renter retains setup authority unless upgrading to custom turnkey engineering execution packages.
+                </p>
+            </div>
+            <div class="p-4">
+                <h4 class="heading-font text-lg font-bold text-white mb-2">🛡️ Full Asset Protection</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    All individual rental structures are backed by a transparent replacement valuation clause and a credit merchant verification hold to guarantee field liability security.
+                </p>
+            </div>
+            <div class="p-4 md:col-span-3 text-center mt-6">
+                 <p class="text-sm text-gray-400">Need wireless infrastructure or off-grid pure-sine power arrays? Ask about adding our <b>Electro-Voice Evolve 50M</b> and <b>Anker SOLIX C2000 Gen 2</b> options to your booking.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 py-12 text-center text-xs text-gray-500 border-t border-gray-900">
+        <p class="mb-2">&copy; 2026 Ashdown Live LLC. All Rights Reserved. Private Enterprise Independent of UVA Activities.</p>
+        <p>Inquiries: <a href="mailto:ashish@ashdownlive.com" class="text-gray-400 hover:text-blue-400 underline">ashish@ashdownlive.com</a></p>
+    </footer>
+
+</body>
+</html>

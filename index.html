@@ -1,183 +1,454 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashish Pathak | Audio & Software Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    colors: {
-                        obsidian: '#050505',
-                        ash: '#E5E5E5',
-                        accent: '#4F46E5', // Subtle indigo for tech/audio hybrid
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        /* Experiential Film Grain Overlay */
-        .bg-noise {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none;
-            z-index: 50;
-            opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* Infinite Marquee Animation */
-        .marquee-container {
-            display: flex;
-            width: 200%;
-            animation: scroll 20s linear infinite;
-        }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Custom selection color */
-        ::selection {
-            background-color: #4F46E5;
-            color: #ffffff;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ashish Pathak | Audio &amp; Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#0c0b09;}
+  body,*{cursor:none;}
+  a{color:#f2ede4;text-decoration:none;}
+  a:hover{color:oklch(0.75 0.15 60);}
+  ::selection{background:oklch(0.75 0.15 60);color:#0c0b09;}
+  @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,20px) scale(1.08)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1.05)}50%{transform:translate(-50px,10px) scale(1)}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  .nav-link{color:#9c958a;}
+  .nav-link:hover{color:oklch(0.75 0.15 60);}
+  .btn-primary:hover{background:oklch(0.82 0.15 60);color:#0c0b09;}
+  .btn-outline:hover{border-color:oklch(0.75 0.15 60);color:oklch(0.75 0.15 60);}
+  .card:hover{border-color:oklch(0.75 0.15 60 / 0.5);}
+  .artist-row:hover{color:oklch(0.75 0.15 60);padding-left:20px;}
+  [data-reveal]{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
+  [data-reveal].revealed{opacity:1;transform:translateY(0);}
+  .about-grid{display:grid;grid-template-columns:minmax(280px,460px) 1fr;gap:72px;align-items:start;}
+  .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  @media (max-width:768px){
+    .about-grid{grid-template-columns:1fr;gap:40px;}
+    .skills-grid{grid-template-columns:1fr;}
+    .main-nav{display:none;}
+  }
+</style>
 </head>
-<body class="bg-obsidian text-ash font-sans antialiased overflow-x-hidden selection:bg-accent selection:text-white">
-    
-    <!-- Grain Overlay -->
-    <div class="bg-noise"></div>
+<body>
+<div style="font-family:'Archivo',sans-serif;background:#0c0b09;color:#f2ede4;min-height:100vh;overflow-x:hidden;position:relative;">
+  <canvas id="mic-canvas" style="position:fixed;inset:0;width:100vw;height:100vh;z-index:9999;pointer-events:none;"></canvas>
 
-    <!-- Minimal Header -->
-    <nav class="fixed top-0 w-full p-6 md:p-10 flex justify-between items-center z-40 mix-blend-difference">
-        <div class="font-display font-bold text-xl tracking-tighter uppercase">AP.</div>
-        <!--<a href="#ashdown" class="text-sm tracking-widest uppercase hover:text-accent transition-colors duration-300">Rentals & Production &#8594;</a>-->
+  <!-- stage lighting glows -->
+  <div style="position:absolute;top:-220px;left:8%;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle, oklch(0.75 0.15 60 / 0.14) 0%, transparent 62%);filter:blur(10px);animation:drift 14s ease-in-out infinite;pointer-events:none;"></div>
+  <div style="position:absolute;top:-260px;right:4%;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle, oklch(0.72 0.1 45 / 0.1) 0%, transparent 60%);filter:blur(12px);animation:drift2 18s ease-in-out infinite;pointer-events:none;"></div>
+
+  <!-- header -->
+  <header style="position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;max-width:1200px;margin:0 auto;box-sizing:border-box;">
+    <div style="font-weight:900;font-size:22px;letter-spacing:0.02em;">AP<span style="color:oklch(0.75 0.15 60);">.</span></div>
+    <nav class="main-nav" style="display:flex;gap:28px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#artists" class="nav-link">Artists</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </nav>
+  </header>
 
-    <!-- Experiential Hero Section -->
-    <header class="relative h-screen flex flex-col justify-center px-6 md:px-10 overflow-hidden">
-        <!-- Abstract gradient orb for background depth -->
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse"></div>
-        
-        <div class="relative z-10">
-            <h1 class="font-display font-bold text-6xl md:text-9xl lg:text-[12rem] leading-none tracking-tighter uppercase">
-                <span class="block hover:translate-x-4 transition-transform duration-700">Ashish</span>
-                <span class="block hover:translate-x-8 transition-transform duration-700 text-transparent bg-clip-text bg-gradient-to-r from-ash to-neutral-600">Pathak</span>
-            </h1>
-            <div class="mt-8 flex flex-col md:flex-row md:items-center gap-6">
-                <div class="w-12 h-[1px] bg-neutral-600"></div>
-                <p class="text-lg md:text-xl font-light tracking-wide max-w-xl text-neutral-400">
-                    FOH Audio Engineer. Senior Software Engineer. <br>I build <span class="text-ash font-medium">software</span> and mix <span class="text-ash font-medium">front-of-house audio</span>.
-                </p>
-            </div>
-        </div>
-    </header>
-
-    <!-- Infinite Scrolling Marquee -->
-    <div class="w-full overflow-hidden py-10 border-y border-neutral-900 bg-obsidian z-20 relative">
-        <div class="marquee-container text-4xl md:text-6xl font-display font-bold tracking-tighter text-neutral-800 uppercase whitespace-nowrap">
-            <span class="mx-8">FOH Engineer</span> &bull; 
-            <span class="mx-8">Software Engineer</span> &bull; 
-            <span class="mx-8">System Tech</span> &bull; 
-            <span class="mx-8">Touring</span> &bull; 
-            <span class="mx-8">FOH Engineer</span> &bull; 
-            <span class="mx-8">Software Engineer</span> &bull; 
-            <span class="mx-8">System Tech</span> &bull; 
-            <span class="mx-8">Touring</span>
-        </div>
+  <!-- hero -->
+  <section style="position:relative;z-index:4;max-width:1200px;margin:0 auto;padding:96px 48px 72px;box-sizing:border-box;">
+    <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(0.75 0.15 60);margin-bottom:26px;">
+      <span style="width:8px;height:8px;border-radius:50%;background:oklch(0.75 0.15 60);animation:pulse 1.6s ease-in-out infinite;display:inline-block;"></span>
+      Live from front of house
     </div>
-
-    <!-- Asymmetrical Profile/About Section -->
-    <section class="py-32 px-6 md:px-10 max-w-screen-2xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            <!-- Left: Profile Image Placeholder -->
-            <div class="lg:col-span-5 relative group cursor-crosshair">
-                <div class="absolute inset-0 bg-accent translate-x-4 translate-y-4 rounded-sm transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 opacity-50"></div>
-                <!-- Replace src with your actual profile/console mixing image -->
-                <img src="static/images/kgarira1.png"Ashish Mixing Console" class="relative z-10 w-full h-[600px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
-            </div>
-            
-            <!-- Right: Text Content -->
-            <div class="lg:col-span-7 flex flex-col justify-center">
-                <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tight mb-8">Systematic precision, on stage and in the codebase.</h2>
-                <div class="space-y-6 text-neutral-400 font-light text-lg leading-relaxed max-w-2xl">
-                    <p>
-                        With over a decade of experience as a software engineer, building everything from complex full-stack applications to iOS & Android apps, my passion for problem-solving extends beyond the screen and few years ago, I brought the same midset directly into the live audio realm.
-                    <p>
-                    <p>
-                        Since then, I've spent my time on the road touring across the US and internationally, mixing FOH (front-of-house) or as an A2/RF engineer for <strong>Purna Rai & Dajubhaiharu</strong>, <strong>Sajjan Raj Vaidya</strong>, <strong>Bipul Chettri</strong>, <strong>1974 AD</strong>, <strong>Sabin Rai & The Pharaoh</strong>, <strong>Raju Lama & The Angels Band</strong>, <strong>Bartika Eam Rai</strong> and more.
-                    </p>
-                    <p>
-                        Whether I am mixing a full-house show, coordinating complex RF systems, tuning a venue's PA, or architecting a scalable backend, the mindset is the same: keep the routing clean, eliminate faillure points under pressure, and design systems that work perfectly every night.
-                    </p>
-                </p>
-                </div>
-
-                <!-- Dual Skills Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-16 pt-10 border-t border-neutral-900">
-                    <div>
-                        <h3 class="font-display text-xl text-ash mb-4">Live Audio Engineering</h3>
-                        <ul class="space-y-2 text-neutral-500 text-sm tracking-wide">
-                            <li>Front of House (FOH) Mixing</li>
-                            <li>A2 & RF Engineer Management</li>
-                            <li>SMAART System Tuning & Alignment</li>
-                            <li>Tour & Production Management</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="font-display text-xl text-ash mb-4">Software Architecture</h3>
-                        <ul class="space-y-2 text-neutral-500 text-sm tracking-wide">
-                            <li>Full-stack Software Development</li>
-                            <li>Azure & Google Cloud Platform (GCP)</li>
-                            <li>Firebase Integration</li>
-                            <li>Kotlin & multi-platform Applications</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <h1 style="font-size:clamp(64px,11vw,160px);font-weight:900;line-height:0.88;margin:0 0 44px;letter-spacing:-0.03em;text-transform:uppercase;">Ashish<br><span style="color:transparent;-webkit-text-stroke:2px #f2ede4;">Pathak</span></h1>
+    <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-end;justify-content:space-between;">
+      <div style="max-width:420px;">
+        <p style="font-size:clamp(19px,2.2vw,24px);line-height:1.5;color:#f2ede4;margin:0 0 14px;font-weight:700;">FOH Audio Engineer.<br>Senior Software Engineer.</p>
+        <p style="font-size:16px;line-height:1.6;color:#9c958a;margin:0 0 34px;">I build software and mix front-of-house audio.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="#contact" class="btn-primary" style="display:inline-block;background:oklch(0.75 0.15 60);color:#0c0b09;font-weight:800;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 26px;border-radius:5px;">Book me</a>
+          <a href="#about" class="btn-outline" style="display:inline-block;border:1px solid #3a352c;color:#d8d1c4;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 26px;border-radius:5px;font-family:'JetBrains Mono',monospace;">Scroll &darr;</a>
         </div>
-    </section>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.9;background:#12100d;border:1px solid #26221c;border-radius:8px;padding:22px 26px;flex:1 1 380px;max-width:520px;box-shadow:0 24px 60px rgba(0,0,0,0.45);">
+      <div style="display:flex;gap:7px;margin-bottom:14px;">
+        <span style="width:10px;height:10px;border-radius:50%;background:#3a352c;display:inline-block;"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#3a352c;display:inline-block;"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:oklch(0.75 0.15 60);display:inline-block;"></span>
+      </div>
+      <div><span style="color:oklch(0.75 0.15 60);">$</span> whoami</div>
+      <div style="color:#9c958a;">ashish.pathak &mdash; foh_engineer &amp;&amp; senior_swe</div>
+      <div><span style="color:oklch(0.75 0.15 60);">$</span> uptime</div>
+      <div style="color:#9c958a;">10+ years shipping software &middot; touring US &amp; intl<span style="display:inline-block;width:8px;height:15px;background:oklch(0.75 0.15 60);margin-left:6px;vertical-align:middle;animation:blink 1.1s step-end infinite;"></span></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Transition to Rental Company (Ashdown Live LLC) -->
-    <section id="ashdown" class="min-h-[70vh] flex flex-col justify-center items-center text-center px-6 relative border-t border-neutral-900 bg-black">
-        <p class="text-accent uppercase tracking-[0.3em] text-sm mb-6 font-bold">Equipment & Production</p>
-        <h2 class="font-display text-5xl md:text-8xl font-bold tracking-tighter uppercase mb-10 max-w-5xl">
-            Need Premium Tour Tech?
-        </h2>
-        <p class="text-neutral-400 max-w-xl mx-auto mb-12 text-lg font-light">
-            I own and operate <strong class="text-ash font-medium">Ashdown Live LLC</strong>, providing elite touring flypacks, consoles, and scalable PA systems for touring events & local productions in Charlottesville area.
-        </p>
-        <!-- CTA Button simulating page transition -->
-        <!--
-        
-        <a href="ashdown-rentals.html" class="group relative inline-flex items-center justify-center px-10 py-5 font-bold text-obsidian bg-ash rounded-full overflow-hidden transition-all duration-300 hover:scale-105">
-            <span class="absolute inset-0 w-full h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span class="relative flex items-center gap-3 group-hover:text-white transition-colors duration-300">
-                Visit Ashdown Live LLC
-                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            </span>
-        </a>
+  <!-- marquee -->
+  <div style="position:relative;z-index:4;border-top:1px solid #26221c;border-bottom:1px solid #26221c;padding:16px 0;overflow:hidden;background:#0e0d0a;">
+    <div style="display:flex;width:max-content;animation:marq 40s linear infinite;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.22em;text-transform:uppercase;color:#7d766b;white-space:nowrap;">
+      <span style="padding-right:32px;">Purna Rai &amp; Dajubhaiharu &nbsp;&bull;&nbsp; Sajjan Raj Vaidya &nbsp;&bull;&nbsp; Bipul Chettri &nbsp;&bull;&nbsp; 1974 AD &nbsp;&bull;&nbsp; Sabin Rai &amp; The Pharaoh &nbsp;&bull;&nbsp; Raju Lama &amp; The Angels Band &nbsp;&bull;&nbsp; Bartika Eam Rai &nbsp;&bull;&nbsp;</span>
+      <span style="padding-right:32px;">Purna Rai &amp; Dajubhaiharu &nbsp;&bull;&nbsp; Sajjan Raj Vaidya &nbsp;&bull;&nbsp; Bipul Chettri &nbsp;&bull;&nbsp; 1974 AD &nbsp;&bull;&nbsp; Sabin Rai &amp; The Pharaoh &nbsp;&bull;&nbsp; Raju Lama &amp; The Angels Band &nbsp;&bull;&nbsp; Bartika Eam Rai &nbsp;&bull;&nbsp;</span>
+    </div>
+  </div>
 
-    -->
-    </section>
+  <!-- about -->
+  <section id="about" data-reveal class="about-grid" style="position:relative;z-index:4;max-width:1200px;margin:0 auto;padding:110px 48px;box-sizing:border-box;">
+    <div style="position:relative;">
+      <img src="static/images/kgarira1.png" alt="Ashish Pathak at front of house" style="width:100%;display:block;border-radius:6px;filter:saturate(0.9) contrast(1.05);box-shadow:0 30px 80px rgba(0,0,0,0.55);">
+      <div style="position:absolute;left:14px;bottom:14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:rgba(12,11,9,0.82);padding:7px 12px;border-radius:4px;color:oklch(0.75 0.15 60);">// on the road</div>
+    </div>
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(0.75 0.15 60);margin-bottom:20px;">01 &mdash; About</div>
+      <h2 style="font-size:clamp(30px,3.6vw,46px);font-weight:800;line-height:1.1;margin:0 0 28px;letter-spacing:-0.015em;">Systematic precision, on stage and in the codebase.</h2>
+      <p style="font-size:17px;line-height:1.75;color:#b8b0a3;margin:0 0 20px;">With over a decade of experience as a software engineer, building everything from complex full-stack applications to iOS &amp; Android apps, my passion for problem-solving extends beyond the screen &mdash; and a few years ago, I brought the same mindset directly into the live audio realm.</p>
+      <p style="font-size:17px;line-height:1.75;color:#b8b0a3;margin:0 0 20px;">Since then, I've spent my time on the road touring across the US and internationally, mixing FOH or working as an A2/RF engineer for some of the biggest names in Nepali music.</p>
+      <p style="font-size:17px;line-height:1.75;color:#b8b0a3;margin:0;">Whether I'm mixing a full-house show, coordinating complex RF systems, tuning a venue's PA, or architecting a scalable backend, the mindset is the same: <span style="color:#f2ede4;font-weight:700;">keep the routing clean, eliminate failure points under pressure, and design systems that work perfectly every night.</span></p>
+    </div>
+  </section>
 
-    <!-- Minimal Footer -->
-    <footer class="py-10 text-center text-neutral-600 text-sm tracking-widest border-t border-neutral-900">
-        &copy; 2026 ASHISH PATHAK. BUILT FOR SCALE & SOUND.
-    </footer>
+  <!-- skills -->
+  <section id="skills" data-reveal style="position:relative;z-index:4;max-width:1200px;margin:0 auto;padding:20px 48px 110px;box-sizing:border-box;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(0.75 0.15 60);margin-bottom:20px;">02 &mdash; Capabilities</div>
+    <div class="skills-grid">
+      <div class="card" style="background:#12100d;border:1px solid #26221c;border-radius:8px;padding:38px 40px;">
+        <h3 style="font-size:24px;font-weight:800;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.01em;">Live Audio Engineering</h3>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d766b;letter-spacing:0.12em;margin-bottom:26px;">// analog &amp; digital, every night</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;align-items:baseline;gap:14px;font-size:16px;color:#d8d1c4;border-bottom:1px solid #1c1914;padding-bottom:13px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.75 0.15 60);">01</span>Front of House (FOH) Mixing</div>
+          <div style="display:flex;align-items:baseline;gap:14px;font-size:16px;color:#d8d1c4;border-bottom:1px solid #1c1914;padding-bottom:13px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.75 0.15 60);">02</span>A2 &amp; RF Engineer Management</div>
+          <div style="display:flex;align-items:baseline;gap:14px;font-size:16px;color:#d8d1c4;border-bottom:1px solid #1c1914;padding-bottom:13px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.75 0.15 60);">03</span>SMAART System Tuning &amp; Alignment</div>
+          <div style="display:flex;align-items:baseline;gap:14px;font-size:16px;color:#d8d1c4;border-bottom:1px solid #1c1914;padding-bottom:13px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.75 0.15 60);">04</span>Tour &amp; Production Management</div>
+        </div>
+      </div>
+      <div class="card" style="background:#12100d;border:1px solid #26221c;border-radius:8px;padding:38px 40px;">
+        <h3 style="font-size:24px;font-weight:800;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.01em;">Software Architecture</h3>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7d766b;letter-spacing:0.12em;margin-bottom:26px;">// full-stack, cloud, mobile</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;align-items:baseline;gap:14px;font-size:16px;color:#d8d1c4;border-bottom:1px solid #1c1914;padding-bottom:13px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.75 0.15 60);">01</span>Full-stack Software Development</div>
+          <div style="display:flex;align-items:baseline;gap:14px;font-size:16px;color:#d8d1c4;border-bottom:1px solid #1c1914;padding-bottom:13px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.75 0.15 60);">02</span>Azure &amp; Google Cloud Platform (GCP)</div>
+          <div style="display:flex;align-items:baseline;gap:14px;font-size:16px;color:#d8d1c4;border-bottom:1px solid #1c1914;padding-bottom:13px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.75 0.15 60);">03</span>Firebase Integration</div>
+          <div style="display:flex;align-items:baseline;gap:14px;font-size:16px;color:#d8d1c4;border-bottom:1px solid #1c1914;padding-bottom:13px;"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.75 0.15 60);">04</span>Kotlin &amp; Multi-platform Applications</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- artists -->
+  <section id="artists" data-reveal style="position:relative;z-index:4;border-top:1px solid #26221c;background:#0e0d0a;">
+    <div style="max-width:1200px;margin:0 auto;padding:100px 48px;box-sizing:border-box;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(0.75 0.15 60);margin-bottom:20px;">03 &mdash; On the road with</div>
+      <div style="display:flex;flex-direction:column;">
+        <div class="artist-row" style="display:flex;align-items:baseline;gap:28px;padding:22px 8px;border-bottom:1px solid #1c1914;color:#d8d1c4;transition:color .25s,padding-left .25s;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d766b;min-width:32px;">01</span>
+          <span style="font-size:clamp(22px,3vw,34px);font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;">Purna Rai &amp; Dajubhaiharu</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7d766b;margin-left:auto;">FOH</span>
+        </div>
+        <div class="artist-row" style="display:flex;align-items:baseline;gap:28px;padding:22px 8px;border-bottom:1px solid #1c1914;color:#d8d1c4;transition:color .25s,padding-left .25s;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d766b;min-width:32px;">02</span>
+          <span style="font-size:clamp(22px,3vw,34px);font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;">Sajjan Raj Vaidya</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7d766b;margin-left:auto;">FOH</span>
+        </div>
+        <div class="artist-row" style="display:flex;align-items:baseline;gap:28px;padding:22px 8px;border-bottom:1px solid #1c1914;color:#d8d1c4;transition:color .25s,padding-left .25s;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d766b;min-width:32px;">03</span>
+          <span style="font-size:clamp(22px,3vw,34px);font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;">Bipul Chettri</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7d766b;margin-left:auto;">FOH</span>
+        </div>
+        <div class="artist-row" style="display:flex;align-items:baseline;gap:28px;padding:22px 8px;border-bottom:1px solid #1c1914;color:#d8d1c4;transition:color .25s,padding-left .25s;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d766b;min-width:32px;">04</span>
+          <span style="font-size:clamp(22px,3vw,34px);font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;">1974 AD</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7d766b;margin-left:auto;">FOH / A2</span>
+        </div>
+        <div class="artist-row" style="display:flex;align-items:baseline;gap:28px;padding:22px 8px;border-bottom:1px solid #1c1914;color:#d8d1c4;transition:color .25s,padding-left .25s;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d766b;min-width:32px;">05</span>
+          <span style="font-size:clamp(22px,3vw,34px);font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;">Sabin Rai &amp; The Pharaoh</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7d766b;margin-left:auto;">FOH</span>
+        </div>
+        <div class="artist-row" style="display:flex;align-items:baseline;gap:28px;padding:22px 8px;border-bottom:1px solid #1c1914;color:#d8d1c4;transition:color .25s,padding-left .25s;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d766b;min-width:32px;">06</span>
+          <span style="font-size:clamp(22px,3vw,34px);font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;">Raju Lama &amp; The Angels Band</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7d766b;margin-left:auto;">FOH / RF</span>
+        </div>
+        <div class="artist-row" style="display:flex;align-items:baseline;gap:28px;padding:22px 8px;border-bottom:1px solid #1c1914;color:#d8d1c4;transition:color .25s,padding-left .25s;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d766b;min-width:32px;">07</span>
+          <span style="font-size:clamp(22px,3vw,34px);font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;">Bartika Eam Rai</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#7d766b;margin-left:auto;">FOH</span>
+        </div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7d766b;margin-top:22px;">&amp;&amp; more&hellip;</div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact" data-reveal style="position:relative;z-index:4;max-width:1200px;margin:0 auto;padding:130px 48px 150px;box-sizing:border-box;text-align:center;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(0.75 0.15 60);margin-bottom:22px;">04 &mdash; Contact</div>
+    <h2 style="font-size:clamp(38px,5.5vw,72px);font-weight:900;line-height:1.02;margin:0 0 26px;text-transform:uppercase;letter-spacing:-0.02em;">Let's make it<br>sound right.</h2>
+    <p style="font-size:18px;line-height:1.6;color:#b8b0a3;max-width:520px;margin:0 auto 44px;">Touring, one-offs, system design, or software &mdash; if it needs to work perfectly every night, let's talk.</p>
+    <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;">
+      <a href="mailto:ashish@ashdownlive.com" class="btn-primary" style="display:inline-block;background:oklch(0.75 0.15 60);color:#0c0b09;font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 34px;border-radius:6px;">Get in touch</a>
+      <a href="https://ashdown.live" class="btn-outline" style="display:inline-block;border:1px solid #3a352c;color:#d8d1c4;font-weight:700;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 34px;border-radius:6px;font-family:'JetBrains Mono',monospace;">ashdown.live</a>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer style="position:relative;z-index:4;border-top:1px solid #26221c;padding:26px 48px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#7d766b;background:#0e0d0a;">
+    &copy; 2026 Ashish Pathak. Built for scale &amp; sound.
+  </footer>
+</div>
+<script>
+(function() {
+  var els = document.querySelectorAll('[data-reveal]');
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('revealed');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el) {
+    var r = el.getBoundingClientRect();
+    if (r.top < innerHeight * 0.9) { el.classList.add('revealed'); return; }
+    io.observe(el);
+  });
+
+  var canvas = document.getElementById('mic-canvas');
+  var fine = window.matchMedia && matchMedia('(pointer:fine)').matches;
+  if (!fine || !canvas) {
+    if (canvas) canvas.style.display = 'none';
+    document.body.style.cursor = 'auto';
+    return;
+  }
+
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.min(devicePixelRatio || 1, 2);
+  var W = innerWidth, H = innerHeight;
+  function resize() {
+    W = innerWidth; H = innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  var N = 70;
+  var mouse = { x: W / 2, y: H / 2 };
+  var pts = [];
+  for (var i = 0; i < N; i++) {
+    var t = (i / N) * Math.PI * 5;
+    var r = 14 + i * 1.4;
+    var x = W / 2 + Math.cos(t) * r, y = H - 60 + Math.sin(t) * r * 0.45;
+    pts.push({ x: x, y: y, px: x, py: y });
+  }
+  function onMove(e) { mouse.x = e.clientX; mouse.y = e.clientY; }
+  addEventListener('mousemove', onMove);
+  addEventListener('resize', resize);
+
+  var ac;
+  var fbT, fbLong = false;
+  function onClick() {
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      if (ac.state === 'suspended') ac.resume();
+      function tap(t) {
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(160 + Math.random() * 30, t);
+        o.frequency.exponentialRampToValueAtTime(55, t + 0.09);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.35, t + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+        o.connect(g).connect(ac.destination);
+        o.start(t); o.stop(t + 0.3);
+        var dur = 0.06, buf = ac.createBuffer(1, ac.sampleRate * dur, ac.sampleRate);
+        var d = buf.getChannelData(0);
+        for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+        var n = ac.createBufferSource(); n.buffer = buf;
+        var lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900;
+        var ng = ac.createGain(); ng.gain.value = 0.18;
+        n.connect(lp).connect(ng).connect(ac.destination);
+        n.start(t);
+      }
+      function squeal(t) {
+        var f = 900 + Math.random() * 1800;
+        var o = ac.createOscillator(), g = ac.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(f, t);
+        o.frequency.exponentialRampToValueAtTime(f * (1.4 + Math.random() * 0.8), t + 1.1);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.08, t + 0.15);
+        g.gain.setValueAtTime(0.08, t + 0.6);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6);
+        var o2 = ac.createOscillator(), g2 = ac.createGain();
+        o2.type = 'triangle';
+        o2.frequency.setValueAtTime(f * 2.01, t);
+        o2.frequency.exponentialRampToValueAtTime(f * 2.8, t + 1.1);
+        g2.gain.setValueAtTime(0.0001, t);
+        g2.gain.exponentialRampToValueAtTime(0.025, t + 0.2);
+        g2.gain.exponentialRampToValueAtTime(0.0001, t + 1.4);
+        o.connect(g).connect(ac.destination);
+        o2.connect(g2).connect(ac.destination);
+        o.start(t); o2.start(t); o.stop(t + 1.8); o2.stop(t + 1.8);
+      }
+      function voice() {
+        if (!('speechSynthesis' in window) || speechSynthesis.speaking) return false;
+        var u = new SpeechSynthesisUtterance(Math.random() < 0.5 ? 'check, check, one two' : 'check one two, one two');
+        u.rate = 0.95; u.pitch = 0.8; u.volume = 0.7;
+        speechSynthesis.speak(u);
+        return true;
+      }
+      var t0 = ac.currentTime + 0.01;
+      var roll = Math.random();
+      if (roll < 0.45) {
+        tap(t0); tap(t0 + 0.19 + Math.random() * 0.05);
+        fbT = performance.now();
+      } else if (roll < 0.75) {
+        tap(t0);
+        if (!voice()) tap(t0 + 0.19);
+        fbT = performance.now();
+      } else {
+        squeal(t0);
+        fbT = performance.now(); fbLong = true;
+      }
+    } catch (e) { /* audio unavailable */ }
+  }
+  addEventListener('click', onClick);
+
+  var slack = 1.25;
+  var accent = 'oklch(0.75 0.15 60)';
+  var tilt;
+  var len;
+  var raf;
+  function tick() {
+    var ax = W * 0.25, ay = H - 2;
+    var targetTilt = ((W / 2 - mouse.x) / (W / 2)) * 0.22;
+    tilt = tilt === undefined ? targetTilt : tilt + (targetTilt - tilt) * 0.06;
+    var bx = mouse.x - Math.sin(tilt) * 62, by = mouse.y + Math.cos(tilt) * 62;
+    var dist = Math.hypot(bx - ax, by - ay);
+    var targetLen = dist * slack + 300;
+    len = len === undefined ? targetLen : len + (targetLen - len) * 0.25;
+    var segLen = len / (N - 1);
+    var slackAmt = Math.max(0, Math.min(1, (len - dist - 60) / 240));
+    for (var i = 0; i < N; i++) {
+      var p = pts[i];
+      var vx = (p.x - p.px) * 0.72, vy = (p.y - p.py) * 0.72;
+      if (vx * vx + vy * vy < 0.006) { vx = 0; vy = 0; }
+      p.px = p.x; p.py = p.y;
+      p.x += vx; p.y += vy;
+      if (i > 2 && i < N * 0.55 && slackAmt > 0) {
+        var th = (i / (N * 0.55)) * Math.PI * 2 - Math.PI / 2;
+        p.x += (ax + Math.cos(th) * 95 - p.x) * 0.005 * slackAmt;
+        p.y += (H - 115 + Math.sin(th) * 95 - p.y) * 0.005 * slackAmt;
+      }
+    }
+    pts[0].x = ax; pts[0].y = ay;
+    pts[N - 1].x = bx; pts[N - 1].y = by;
+    for (var k = 0; k < 16; k++) {
+      for (var i = 0; i < N - 1; i++) {
+        var a = pts[i], b = pts[i + 1];
+        var dx = b.x - a.x, dy = b.y - a.y;
+        var d = Math.hypot(dx, dy) || 0.0001;
+        var diff = (d - segLen) / d * 0.5;
+        dx *= diff; dy *= diff;
+        if (i !== 0) { a.x += dx; a.y += dy; }
+        if (i + 1 !== N - 1) { b.x -= dx; b.y -= dy; }
+        else if (i === 0) { b.x -= dx * 2; b.y -= dy * 2; }
+      }
+      pts[0].x = ax; pts[0].y = ay;
+      pts[N - 1].x = bx; pts[N - 1].y = by;
+    }
+    for (var b2 = 0; b2 < 3; b2++) {
+      for (var i = 1; i < N - 1; i++) {
+        var p = pts[i];
+        var mx = (pts[i - 1].x + pts[i + 1].x) / 2, my = (pts[i - 1].y + pts[i + 1].y) / 2;
+        p.x += (mx - p.x) * 0.12; p.y += (my - p.y) * 0.12;
+      }
+    }
+    for (var i = 0; i < N - 1; i++) {
+      var a = pts[i], b = pts[i + 1];
+      var dx = b.x - a.x, dy = b.y - a.y;
+      var d = Math.hypot(dx, dy) || 0.0001;
+      var diff = (d - segLen) / d * 0.5;
+      dx *= diff; dy *= diff;
+      if (i !== 0) { a.x += dx; a.y += dy; }
+      if (i + 1 !== N - 1) { b.x -= dx; b.y -= dy; }
+    }
+    pts[0].x = ax; pts[0].y = ay;
+    pts[N - 1].x = bx; pts[N - 1].y = by;
+    var ddx = -Math.sin(tilt), ddy = Math.cos(tilt);
+    var stiff = [0.65, 0.45, 0.28, 0.14, 0.06];
+    for (var j = 1; j <= stiff.length; j++) {
+      var p = pts[N - 1 - j], w2 = stiff[j - 1];
+      var tx = bx + ddx * j * segLen, ty = by + ddy * j * segLen;
+      p.x += (tx - p.x) * w2; p.y += (ty - p.y) * w2;
+    }
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 0.7;
+    var boil = Math.floor(performance.now() / 240);
+    var sd = boil * 9301 + 49297;
+    function rnd() { sd = (sd * 16807) % 2147483647; return sd / 2147483647 - 0.5; }
+    function sketchPath(amp) {
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x + rnd() * amp, pts[0].y + rnd() * amp);
+      for (var i = 1; i < N - 1; i++) {
+        var xc = (pts[i].x + pts[i + 1].x) / 2 + rnd() * amp;
+        var yc = (pts[i].y + pts[i + 1].y) / 2 + rnd() * amp;
+        ctx.quadraticCurveTo(pts[i].x + rnd() * amp * 0.5, pts[i].y + rnd() * amp * 0.5, xc, yc);
+      }
+      ctx.lineTo(pts[N - 1].x, pts[N - 1].y);
+    }
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    sketchPath(3.5); ctx.strokeStyle = 'oklch(0.75 0.15 60 / 0.08)'; ctx.lineWidth = 3; ctx.stroke();
+    ctx.save();
+    ctx.shadowColor = 'oklch(0.75 0.15 60 / 0.35)'; ctx.shadowBlur = 9;
+    sketchPath(2.2); ctx.strokeStyle = 'rgba(216,209,196,0.22)'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.restore();
+    sketchPath(2.2); ctx.strokeStyle = 'rgba(216,209,196,0.11)'; ctx.lineWidth = 1.1; ctx.stroke();
+    ctx.save();
+    ctx.translate(ax, ay);
+    ctx.strokeStyle = 'rgba(216,209,196,0.55)'; ctx.lineWidth = 1.4;
+    ctx.strokeRect(-7 + rnd(), -18 + rnd(), 14, 18);
+    ctx.globalAlpha = 0.5; ctx.strokeStyle = accent;
+    ctx.beginPath(); ctx.moveTo(-7, -14 + rnd()); ctx.lineTo(7, -14 + rnd()); ctx.stroke();
+    ctx.restore();
+    ctx.save();
+    ctx.translate(mouse.x, mouse.y);
+    ctx.strokeStyle = 'rgba(216,209,196,0.6)'; ctx.lineWidth = 1.4;
+    ctx.globalAlpha = 0.18;
+    ctx.beginPath();
+    for (var j = 0; j < 4; j++) { ctx.moveTo(-18 + j * 3 + rnd() * 2, 24 + j * 2); ctx.lineTo(14 + j * 3 + rnd() * 2, 23 + j * 2); }
+    ctx.stroke();
+    ctx.globalAlpha = 0.7;
+    ctx.rotate(-Math.PI / 2 + tilt);
+    var fb = fbT ? Math.max(0, 1 - (performance.now() - fbT) / (fbLong ? 1600 : 550)) : 0;
+    if (fb === 0) fbLong = false;
+    ctx.shadowColor = 'oklch(0.75 0.15 60 / ' + (0.3 + fb * 0.5) + ')';
+    ctx.shadowBlur = 12 + fb * 26;
+    var R = 12.5;
+    function ln(x1, y1, x2, y2, a) { ctx.beginPath(); ctx.moveTo(x1 + rnd() * a, y1 + rnd() * a); ctx.lineTo(x2 + rnd() * a, y2 + rnd() * a); ctx.stroke(); }
+    for (var p2 = 0; p2 < 2; p2++) { ln(-62, -5, -14, -8.5, 1.8); ln(-62, 5, -14, 8.5, 1.8); ln(-62, -5, -62, 5, 1.8); }
+    ctx.globalAlpha = 0.28;
+    for (var hx = -56; hx < -18; hx += 7) ln(hx, -6, hx - 4, 6, 1.2);
+    ctx.globalAlpha = 0.7;
+    ln(-14, -8.5, -14, 8.5, 1.2); ln(-9, -9.5, -9, 9.5, 1.2);
+    for (var c = 0; c < 2; c++) {
+      ctx.beginPath();
+      for (var a2 = 0; a2 <= 20; a2++) {
+        var th = (a2 / 20) * Math.PI * 2;
+        var rr = R + rnd() * 1.8;
+        if (a2 === 0) ctx.moveTo(Math.cos(th) * rr, Math.sin(th) * rr);
+        else ctx.lineTo(Math.cos(th) * rr, Math.sin(th) * rr);
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 0.32;
+    for (var g = -9; g <= 9; g += 4) {
+      var e = Math.sqrt(Math.max(0, R * R - g * g)) - 1;
+      ln(g, -e, g, e, 0.8);
+      ln(-e, g, e, g, 0.8);
+    }
+    ctx.restore();
+    raf = requestAnimationFrame(tick);
+  }
+  raf = requestAnimationFrame(tick);
+})();
+</script>
 </body>
 </html>
