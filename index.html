@@ -27,6 +27,7 @@
   [data-reveal].revealed{opacity:1;transform:translateY(0);}
   .about-grid{display:grid;grid-template-columns:minmax(280px,460px) 1fr;gap:72px;align-items:start;}
   .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .main-nav{display:flex;}
   @media (max-width:768px){
     .about-grid{grid-template-columns:1fr;gap:40px;}
     .skills-grid{grid-template-columns:1fr;}
@@ -45,6 +46,21 @@
   .story-tap{position:absolute;top:0;bottom:0;width:50%;z-index:2;}
   .story-tap-prev{left:0;}
   .story-tap-next{right:0;}
+  .contact-form{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:16px;text-align:left;}
+  .contact-form input,.contact-form textarea{width:100%;box-sizing:border-box;background:#12100d;border:1px solid #26221c;border-radius:6px;padding:15px 16px;color:#f2ede4;font-family:'JetBrains Mono',monospace;font-size:14px;transition:border-color .2s;}
+  .contact-form input::placeholder,.contact-form textarea::placeholder{color:#7d766b;}
+  .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:oklch(0.75 0.15 60);}
+  .contact-form textarea{resize:vertical;min-height:120px;line-height:1.6;}
+  .contact-form button{border:none;cursor:pointer;background:oklch(0.75 0.15 60);color:#0c0b09;font-family:'Archivo',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 34px;border-radius:6px;transition:background .2s;}
+  .contact-form button:hover{background:oklch(0.82 0.15 60);}
+  .contact-form button:disabled{opacity:0.6;cursor:default;}
+  .form-hp{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;}
+  .form-status{min-height:20px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.04em;text-align:center;}
+  .form-status.ok{color:oklch(0.75 0.15 60);}
+  .form-status.err{color:#e0736b;}
+  .contact-alt{margin-top:26px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#7d766b;text-align:center;}
+  .contact-alt a{color:#9c958a;}
+  .contact-alt a:hover{color:oklch(0.75 0.15 60);}
 </style>
 </head>
 <body>
@@ -58,7 +74,7 @@
   <!-- header -->
   <header style="position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;max-width:1200px;margin:0 auto;box-sizing:border-box;">
     <div style="font-weight:900;font-size:22px;letter-spacing:0.02em;">AP<span style="color:oklch(0.75 0.15 60);">.</span></div>
-    <nav class="main-nav" style="display:flex;gap:28px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">
+    <nav class="main-nav" style="gap:28px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">
       <a href="#about" class="nav-link">About</a>
       <a href="#skills" class="nav-link">Skills</a>
       <a href="#artists" class="nav-link">Artists</a>
@@ -77,9 +93,9 @@
       <div style="max-width:420px;">
         <p style="font-size:clamp(19px,2.2vw,24px);line-height:1.5;color:#f2ede4;margin:0 0 14px;font-weight:700;">FOH Audio Engineer.<br>Senior Software Engineer.</p>
         <p style="font-size:16px;line-height:1.6;color:#9c958a;margin:0 0 34px;">I build software and mix front-of-house audio.</p>
-        <div style="display:flex;gap:14px;flex-wrap:wrap;">
-          <a href="#contact" class="btn-primary" style="display:inline-block;background:oklch(0.75 0.15 60);color:#0c0b09;font-weight:800;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 26px;border-radius:5px;">Book me</a>
-          <a href="#about" class="btn-outline" style="display:inline-block;border:1px solid #3a352c;color:#d8d1c4;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 26px;border-radius:5px;font-family:'JetBrains Mono',monospace;">Scroll &darr;</a>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+          <a href="#contact" class="btn-primary" style="display:inline-flex;align-items:center;justify-content:center;background:oklch(0.75 0.15 60);color:#0c0b09;font-weight:800;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 26px;border-radius:5px;">Contact me</a>
+          <a href="#about" class="btn-outline" style="display:inline-flex;align-items:center;justify-content:center;border:1px solid #3a352c;color:#d8d1c4;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;padding:14px 26px;border-radius:5px;font-family:'JetBrains Mono',monospace;">Scroll &darr;</a>
         </div>
       </div>
       <div style="font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.9;background:#12100d;border:1px solid #26221c;border-radius:8px;padding:22px 26px;flex:1 1 380px;max-width:520px;box-shadow:0 24px 60px rgba(0,0,0,0.45);">
@@ -204,15 +220,23 @@
     <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(0.75 0.15 60);margin-bottom:22px;">04 &mdash; Contact</div>
     <h2 style="font-size:clamp(38px,5.5vw,72px);font-weight:900;line-height:1.02;margin:0 0 26px;text-transform:uppercase;letter-spacing:-0.02em;">Let's make it<br>sound right.</h2>
     <p style="font-size:18px;line-height:1.6;color:#b8b0a3;max-width:520px;margin:0 auto 44px;">Touring, one-offs, system design, or software &mdash; if it needs to work perfectly every night, let's talk.</p>
-    <div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;">
-      <a href="mailto:ashish@ashdownlive.com" class="btn-primary" style="display:inline-block;background:oklch(0.75 0.15 60);color:#0c0b09;font-weight:800;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 34px;border-radius:6px;">Get in touch</a>
-      <a href="https://ashdown.live" class="btn-outline" style="display:inline-block;border:1px solid #3a352c;color:#d8d1c4;font-weight:700;font-size:15px;letter-spacing:0.06em;text-transform:uppercase;padding:18px 34px;border-radius:6px;font-family:'JetBrains Mono',monospace;">ashdown.live</a>
-    </div>
+    <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="bbaf20cf-ecac-4fc8-a4b2-bee47e6a34e5">
+      <input type="hidden" name="subject" value="New message from ashdown.live">
+      <input type="hidden" name="from_name" value="ashdown.live contact form">
+      <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+      <input type="email" name="email" placeholder="Your email" required autocomplete="email">
+      <textarea name="message" placeholder="What do you need? Touring, one-offs, system design, software..." required></textarea>
+      <input type="checkbox" name="botcheck" class="form-hp" tabindex="-1" autocomplete="off">
+      <button type="submit" id="contact-submit">Send message</button>
+      <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+    </form>
+    <div class="contact-alt">Or email directly &mdash; <a href="mailto:contact@ashdown.live">contact@ashdown.live</a> &nbsp;&bull;&nbsp; <a href="https://ashdown.live">ashdown.live</a></div>
   </section>
 
   <!-- footer -->
   <footer style="position:relative;z-index:4;border-top:1px solid #26221c;padding:26px 48px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#7d766b;background:#0e0d0a;">
-    &copy; 2026 Ashish Pathak. Built for scale &amp; sound.
+    &copy; 2026 Ashish Pathak.
   </footer>
 </div>
 <script>
@@ -231,6 +255,40 @@
     if (r.top < innerHeight * 0.9) { el.classList.add('revealed'); return; }
     io.observe(el);
   });
+
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    var status = document.getElementById('form-status');
+    var submitBtn = document.getElementById('contact-submit');
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      status.className = 'form-status';
+      status.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      var data = new FormData(contactForm);
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      }).then(function(res) {
+        return res.json();
+      }).then(function(json) {
+        if (json.success) {
+          status.className = 'form-status ok';
+          status.textContent = 'Thanks — your message is on its way.';
+          contactForm.reset();
+        } else {
+          status.className = 'form-status err';
+          status.textContent = json.message || 'Something went wrong. Please email directly.';
+          submitBtn.disabled = false;
+        }
+      }).catch(function() {
+        status.className = 'form-status err';
+        status.textContent = 'Network error. Please email directly.';
+        submitBtn.disabled = false;
+      });
+    });
+  }
 
   var story = document.getElementById('about-story');
   if (story) {
