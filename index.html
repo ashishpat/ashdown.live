@@ -106,14 +106,10 @@
 
   <!-- about -->
   <section id="about" data-reveal class="about-grid" style="position:relative;z-index:4;max-width:1200px;margin:0 auto;padding:110px 48px;box-sizing:border-box;">
-    <div class="story" id="about-story">
-      <img class="story-slide" src="static/gallery/kgarira1.png" alt="K Garira? FOH View" data-caption="// kgarira">
-      <img class="story-slide active" src="static/gallery/20260703_221521.jpeg" alt="Front of house view of a Purna Rai &amp; Dajubhaiharu show" data-caption="// front of house">
-      <img class="story-slide" src="static/gallery/20260703_224104.jpeg" alt="SMAART system analyzer at the mix position" data-caption="// system tuning">
-      <img class="story-slide" src="static/gallery/20260704_224455.jpeg" alt="Stage lighting during a live set" data-caption="// showtime">
+    <div class="story" id="about-story" data-gallery="static/gallery">
       <div class="story-scrim"></div>
       <div class="story-progress" id="story-progress"></div>
-      <div class="story-caption" id="story-caption">// front of house</div>
+      <div class="story-caption" id="story-caption"></div>
       <div class="story-tap story-tap-prev" aria-label="Previous"></div>
       <div class="story-tap story-tap-next" aria-label="Next"></div>
     </div>
@@ -238,47 +234,111 @@
 
   var story = document.getElementById('about-story');
   if (story) {
-    var slides = [].slice.call(story.querySelectorAll('.story-slide'));
-    var progress = document.getElementById('story-progress');
-    var caption = document.getElementById('story-caption');
-    var fills = slides.map(function() {
-      var seg = document.createElement('div');
-      seg.className = 'story-seg';
-      var fill = document.createElement('div');
-      fill.className = 'story-seg-fill';
-      seg.appendChild(fill);
-      progress.appendChild(seg);
-      return fill;
-    });
-    var current = 0;
-    var storyTimer;
-    var DURATION = 4000;
-    function renderStory(i, animate) {
-      slides[current].classList.remove('active');
-      current = (i + slides.length) % slides.length;
-      slides[current].classList.add('active');
-      caption.textContent = slides[current].dataset.caption;
-      fills.forEach(function(f, idx) {
-        f.classList.remove('animate');
-        f.style.transition = 'none';
-        f.style.width = idx < current ? '100%' : '0%';
-      });
-      if (animate) {
-        void fills[current].offsetWidth;
-        fills[current].style.transition = 'width ' + DURATION + 'ms linear';
-        fills[current].style.width = '100%';
+    var galleryPath = story.dataset.gallery;
+    var CAPTIONS = {
+      'kgarira1.png': '// on the road',
+      '20260703_221521.jpeg': '// front of house',
+      '20260703_224104.jpeg': '// system tuning',
+      '20260704_224455.jpeg': '// showtime',
+      '20260710_203852~3.jpg': '// between shows'
+    };
+    var DEFAULT_DURATION = 4000;
+    fetch(galleryPath + '/manifest.json')
+      .then(function(res) { return res.json(); })
+      .then(initStory)
+      .catch(function() { /* no manifest available */ });
+
+    function slideDuration(slide) {
+      if (slide.tagName === 'VIDEO' && slide.duration && isFinite(slide.duration)) {
+        return slide.duration * 1000;
       }
+      return DEFAULT_DURATION;
     }
-    function nextStory() { renderStory(current + 1, true); scheduleStory(); }
-    function prevStory() { renderStory(current - 1, true); scheduleStory(); }
-    function scheduleStory() {
-      clearTimeout(storyTimer);
-      storyTimer = setTimeout(nextStory, DURATION);
+
+    function initStory(manifest) {
+      if (!manifest || !manifest.length) return;
+      var progress = document.getElementById('story-progress');
+      var caption = document.getElementById('story-caption');
+      var referenceNode = story.querySelector('.story-scrim');
+      var slides = manifest.map(function(entry) {
+        var el;
+        if (entry.type === 'video') {
+          el = document.createElement('video');
+          el.muted = true;
+          el.playsInline = true;
+          el.preload = 'metadata';
+        } else {
+          el = document.createElement('img');
+          el.alt = 'Ashish Pathak on the road';
+        }
+        el.className = 'story-slide';
+        el.src = galleryPath + '/' + entry.file;
+        el.dataset.caption = CAPTIONS[entry.file] || '// on the road';
+        story.insertBefore(el, referenceNode);
+        return el;
+      });
+      slides[0].classList.add('active');
+      var fills = slides.map(function() {
+        var seg = document.createElement('div');
+        seg.className = 'story-seg';
+        var fill = document.createElement('div');
+        fill.className = 'story-seg-fill';
+        seg.appendChild(fill);
+        progress.appendChild(seg);
+        return fill;
+      });
+      var current = 0;
+      var storyTimer;
+      function renderStory(i, animate) {
+        var prevSlide = slides[current];
+        prevSlide.classList.remove('active');
+        if (prevSlide.tagName === 'VIDEO') { prevSlide.pause(); prevSlide.currentTime = 0; }
+        current = (i + slides.length) % slides.length;
+        var slide = slides[current];
+        slide.classList.add('active');
+        caption.textContent = slide.dataset.caption;
+        fills.forEach(function(f, idx) {
+          f.classList.remove('animate');
+          f.style.transition = 'none';
+          f.style.width = idx < current ? '100%' : '0%';
+        });
+        if (slide.tagName === 'VIDEO') {
+          slide.currentTime = 0;
+          var playPromise = slide.play();
+          if (playPromise && playPromise.catch) playPromise.catch(function() {});
+        }
+        if (animate) {
+          var startFill = function() {
+            void fills[current].offsetWidth;
+            fills[current].style.transition = 'width ' + slideDuration(slide) + 'ms linear';
+            fills[current].style.width = '100%';
+          };
+          if (slide.tagName === 'VIDEO' && slide.readyState < 1) {
+            slide.addEventListener('loadedmetadata', startFill, { once: true });
+          } else {
+            startFill();
+          }
+        }
+      }
+      function nextStory() { renderStory(current + 1, true); scheduleStory(); }
+      function prevStory() { renderStory(current - 1, true); scheduleStory(); }
+      function scheduleStory() {
+        clearTimeout(storyTimer);
+        var slide = slides[current];
+        if (slide.tagName === 'VIDEO' && slide.readyState < 1) {
+          slide.addEventListener('loadedmetadata', function() {
+            clearTimeout(storyTimer);
+            storyTimer = setTimeout(nextStory, slideDuration(slide));
+          }, { once: true });
+          return;
+        }
+        storyTimer = setTimeout(nextStory, slideDuration(slide));
+      }
+      story.querySelector('.story-tap-prev').addEventListener('click', prevStory);
+      story.querySelector('.story-tap-next').addEventListener('click', nextStory);
+      renderStory(0, true);
+      scheduleStory();
     }
-    story.querySelector('.story-tap-prev').addEventListener('click', prevStory);
-    story.querySelector('.story-tap-next').addEventListener('click', nextStory);
-    renderStory(0, true);
-    scheduleStory();
   }
 
   var canvas = document.getElementById('mic-canvas');
@@ -382,6 +442,7 @@
   addEventListener('click', onClick);
 
   var slack = 1.25;
+  var grav = 0.5;
   var accent = 'oklch(0.75 0.15 60)';
   var tilt;
   var len;
@@ -398,10 +459,10 @@
     var slackAmt = Math.max(0, Math.min(1, (len - dist - 60) / 240));
     for (var i = 0; i < N; i++) {
       var p = pts[i];
-      var vx = (p.x - p.px) * 0.72, vy = (p.y - p.py) * 0.72;
-      if (vx * vx + vy * vy < 0.006) { vx = 0; vy = 0; }
+      var vx = (p.x - p.px) * 0.62, vy = (p.y - p.py) * 0.62;
+      if (vx * vx + vy * vy < 0.004) { vx = 0; vy = 0; }
       p.px = p.x; p.py = p.y;
-      p.x += vx; p.y += vy;
+      p.x += vx; p.y += vy + grav;
       if (i > 2 && i < N * 0.55 && slackAmt > 0) {
         var th = (i / (N * 0.55)) * Math.PI * 2 - Math.PI / 2;
         p.x += (ax + Math.cos(th) * 95 - p.x) * 0.005 * slackAmt;
@@ -424,11 +485,11 @@
       pts[0].x = ax; pts[0].y = ay;
       pts[N - 1].x = bx; pts[N - 1].y = by;
     }
-    for (var b2 = 0; b2 < 3; b2++) {
+    for (var b2 = 0; b2 < 2; b2++) {
       for (var i = 1; i < N - 1; i++) {
         var p = pts[i];
         var mx = (pts[i - 1].x + pts[i + 1].x) / 2, my = (pts[i - 1].y + pts[i + 1].y) / 2;
-        p.x += (mx - p.x) * 0.12; p.y += (my - p.y) * 0.12;
+        p.x += (mx - p.x) * 0.07; p.y += (my - p.y) * 0.07;
       }
     }
     for (var i = 0; i < N - 1; i++) {

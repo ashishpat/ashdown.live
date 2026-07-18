@@ -29,5 +29,8 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Build tailwindcss
       run: npm run build:css
+
+    - name: Generate gallery manifest
+      run: npm run build:gallery
       
       
