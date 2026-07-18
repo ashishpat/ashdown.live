@@ -19,6 +19,8 @@
   @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
   .nav-link{color:#9c958a;}
   .nav-link:hover{color:oklch(0.75 0.15 60);}
+  .insta-link{color:#9c958a;display:inline-flex;align-items:center;}
+  .insta-link:hover{color:oklch(0.75 0.15 60);}
   .btn-primary:hover{background:oklch(0.82 0.15 60);color:#0c0b09;}
   .btn-outline:hover{border-color:oklch(0.75 0.15 60);color:oklch(0.75 0.15 60);}
   .card:hover{border-color:oklch(0.75 0.15 60 / 0.5);}
@@ -74,12 +76,17 @@
   <!-- header -->
   <header style="position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:28px 48px;max-width:1200px;margin:0 auto;box-sizing:border-box;">
     <div style="font-weight:900;font-size:22px;letter-spacing:0.02em;">AP<span style="color:oklch(0.75 0.15 60);">.</span></div>
-    <nav class="main-nav" style="gap:28px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">
-      <a href="#about" class="nav-link">About</a>
-      <a href="#skills" class="nav-link">Skills</a>
-      <a href="#artists" class="nav-link">Artists</a>
-      <a href="#contact" class="nav-link">Contact</a>
-    </nav>
+    <div style="display:flex;align-items:center;gap:28px;">
+      <nav class="main-nav" style="gap:28px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#artists" class="nav-link">Artists</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+      <a href="https://instagram.com/ashdownlive" target="_blank" rel="noopener noreferrer" class="insta-link" aria-label="Ashdown Live on Instagram">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5.5"></rect><circle cx="12" cy="12" r="4.3"></circle><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"></circle></svg>
+      </a>
+    </div>
   </header>
 
   <!-- hero -->
@@ -133,7 +140,7 @@
       <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:oklch(0.75 0.15 60);margin-bottom:20px;">01 &mdash; About</div>
       <h2 style="font-size:clamp(30px,3.6vw,46px);font-weight:800;line-height:1.1;margin:0 0 28px;letter-spacing:-0.015em;">Systematic precision, on stage and in the codebase.</h2>
       <p style="font-size:17px;line-height:1.75;color:#b8b0a3;margin:0 0 20px;">With over a decade of experience as a software engineer, building everything from complex full-stack applications to iOS &amp; Android apps, my passion for problem-solving extends beyond the screen &mdash; and a few years ago, I brought the same mindset directly into the live audio realm.</p>
-      <p style="font-size:17px;line-height:1.75;color:#b8b0a3;margin:0 0 20px;">Since then, I've spent my time on the road touring across the US and internationally, mixing FOH or working as an A2/RF engineer for some of the biggest names in Nepali music.</p>
+      <p style="font-size:17px;line-height:1.75;color:#b8b0a3;margin:0 0 20px;">Since then, I've spent my time on the road touring across the US and internationally, mixing FOH or working as an A2/RF engineer for some of the biggest names in Nepali music &mdash; including a sold-out crowd of <span style="color:#f2ede4;font-weight:700;">3,500 at Texas Live!</span></p>
       <p style="font-size:17px;line-height:1.75;color:#b8b0a3;margin:0;">Whether I'm mixing a full-house show, coordinating complex RF systems, tuning a venue's PA, or architecting a scalable backend, the mindset is the same: <span style="color:#f2ede4;font-weight:700;">keep the routing clean, eliminate failure points under pressure, and design systems that work perfectly every night.</span></p>
     </div>
   </section>
@@ -231,7 +238,7 @@
       <button type="submit" id="contact-submit">Send message</button>
       <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
     </form>
-    <div class="contact-alt">Or email directly &mdash; <a href="mailto:contact@ashdown.live">contact@ashdown.live</a> &nbsp;&bull;&nbsp; <a href="https://ashdown.live">ashdown.live</a></div>
+    <div class="contact-alt">Or email directly &mdash; <a href="mailto:contact@ashdown.live">contact@ashdown.live</a> &nbsp;&bull;&nbsp; <a href="https://instagram.com/ashdownlive" target="_blank" rel="noopener noreferrer">@ashdownlive</a></div>
   </section>
 
   <!-- footer -->
